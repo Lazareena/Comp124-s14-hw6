@@ -41,14 +41,20 @@ public class PopularArticleAnalyzer {
     public static void main(String args[]) {
         Language simple = Language.getByLangCode("simple");
 
-        // Change the path below to point to the directory on the lab computer
+        // Change the path below to point to the parent directory on the lab computer
         // or laptop that holds the BIG "db" directory.
-        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper("/Users/ssen/wikAPIdia");
-        PopularArticleAnalyzer analyzer = new PopularArticleAnalyzer(wrapper);
+        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper(".");
 
-        System.out.println("most popular languages in " + simple);
-        for (LocalPage lp : analyzer.getMostPopular(simple, 50)) {
-            System.out.println("\t" + lp);
+        // A simple test of the WikAPIdia wrapper.
+        LocalPage page = wrapper.getLocalPageByTitle(simple, "Apple");
+        if (page == null) {
+            System.err.println("COULDN'T FIND Apple! Something's wrong...");
+            System.exit(1);
         }
+
+        // TODO:
+        // construct a PopularArticleAnalyzer
+        // Print out the 20 most popular articles in the language.
+        // United states should be #1
     }
 }

@@ -27,8 +27,6 @@ import java.util.List;
  * @author Shilad Sen
  */
 public class WikAPIdiaWrapper {
-    public static final String PATH_LAPTOP = ".";
-    public static final String PATH_LAB = "wikAPIdia";
 
     private static final int CONCEPT_ALGORITHM_ID = 1;
 
@@ -41,8 +39,8 @@ public class WikAPIdiaWrapper {
     /**
      * Creates a new wrapper object with default configuration settings.
      *
-     * baseDir should either be PATH_LAPTOP or PATH_LAB depending on whether
-     * you are using a lab computer or not.
+     * baseDir should be the parent directory containing the "db" directory.
+     * You must have read / write permissions in this directory.
      */
     public WikAPIdiaWrapper(String baseDir) {
         try {
