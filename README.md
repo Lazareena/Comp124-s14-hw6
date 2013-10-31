@@ -6,16 +6,20 @@ Wikipedia offers encyclopedias in [287 different languages](http://meta.wikimedi
 You will identify the most popular articles in each language, and uncover the articles in other
   languages that reference the same concept.
 
-Your program will rely on the [wikAPIdia software library](https://github.com/shilad/wikAPIdia)
-developed by Shilad, Rebecca, and [Brent Hecht](http://www.brenthecht.com/).
-wikAPIdia is a large, complex project, but we've created a helper class called WikapidiaWrapper
-to make your life easier.
-
 As you work on this assignment, you'll practice interacting with java Lists.
 You'll create them, loop over them, and search them.
 
 Your finished program will look like:
 ![alt tag](https://raw.github.com/mac-comp124-f13/hw6/master/screenshot.png?login=shilad&token=9ab528c59d524400fd585d7b5f8ac53b)
+
+In this visualization, each row of boxes represents the most popular Wikipedia articles in a particular language (Simple English, Hindi, Latin).
+The user of this visualization is hovering their cursor over the Hindi article for "United States", and it is highlighted in purple.
+The visualization has highlighted the corresponding articles in Simple English (blue), and Latin (orange).
+
+Your program will rely on the [wikAPIdia software library](https://github.com/shilad/wikAPIdia)
+developed by Shilad, Rebecca, [Brent Hecht](http://www.brenthecht.com/), and many others.
+wikAPIdia is a large, complex project, but we've created a helper class called WikapidiaWrapper
+to make your life easier.
 
 ## Getting started
 Fork and clone this repository.
