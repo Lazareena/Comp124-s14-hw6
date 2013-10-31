@@ -76,12 +76,17 @@ Note that you need to look for a measure of "popularity" provided by `WikAPIdiaW
 Since PopularityAnalyzer does not extend acm's Program, you'll need to use System.out.println to print things to the console
 (note that this is the standard way Java programmers write messages to the console).
 
-To test your method, you'll need to change the `main()` method. First, construct a PopularityAnalyzer instance, 
-and then call the getMostPopular method on it.
+To test your method, you'll need to change the `main()` method. First, construct a `PopularityAnalyzer` instance, 
+and then call its `getMostPopular` method. Run your program. You should see your messages printed to the console.
 
 Once you are printing out your popularity scores for all articles, your next task is to capture them in a data structure and return them.
-I've given you a 
-Create an empty list that will contain LocalPagePopularity objects.
+To find the most popular pages, you'll need to remember the popularity of each page.
+I've given you a class called `LocalPagePopularity` that will help do this. 
+It's a container for a local page and its popularity. 
+
+In the `getMostPopular` method, create an empty list that will contain LocalPagePopularity objects.
+As you iterate over the `LocalPage` objects and calculate their popularity, create a LocalPagePopularity instance and
+add it to your list.
 
 Tasks;
 1. Popular article analyzer
