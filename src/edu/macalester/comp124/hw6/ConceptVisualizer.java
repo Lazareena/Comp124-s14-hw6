@@ -48,7 +48,7 @@ public class ConceptVisualizer extends GraphicsProgram {
 
     public void run() {
         setSize(800, 400);
-        wp = new WikAPIdiaWrapper(WikAPIdiaWrapper.PATH_LAPTOP);
+        wp = new WikAPIdiaWrapper("/Users/ssen/wikAPIdia");
         label = new FancyLabel("Hover over a title to analyze it");
         label.setColor(ColorPallete.FONT_COLOR);
 
@@ -71,17 +71,24 @@ public class ConceptVisualizer extends GraphicsProgram {
                 hindiBoxes.unhighlight();
                 label.setText("");
             } else {
-                List<LocalPage> pages = wp.getInOtherLanguages(box.getPage());
-                pages.add(box.getPage());
+                List<LocalPage> pages = null;
+                String description = "";
+
+                LocalPage lp = box.getPage();
+                System.out.println("You hovered over " + lp);
+
+                // Get all pages representing the same concept.
+                // Build up a textual description of the pages in each language.
+                // You can insert line breaks in your textual description using newlines ("\n").
+                pages = wp.getInOtherLanguages(lp);
+                for (LocalPage lp2 : pages) {
+                    description += lp2.getLanguage() + ": " + lp2.getTitle() + "\n";
+                }
+
+                label.setText(description);
                 simpleBoxes.highlightPages(pages);
                 latinBoxes.highlightPages(pages);
                 hindiBoxes.highlightPages(pages);
-
-                String description = "";
-                for (LocalPage lp : pages) {
-                    description += lp.getLanguage() + ": " + lp.getTitle().getTitleStringWithoutNamespace() + "\n";
-                }
-                label.setText(description);
             }
         } else {
             simpleBoxes.unhighlight();

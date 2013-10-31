@@ -24,6 +24,7 @@ public class LocalPagePopularity implements Comparable<LocalPagePopularity> {
 
     @Override
     public int compareTo(LocalPagePopularity localPagePopularity) {
+//        return 0;
         return numInLinks - localPagePopularity.numInLinks;
     }
 }

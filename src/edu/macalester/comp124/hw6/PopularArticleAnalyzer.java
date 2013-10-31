@@ -39,5 +39,13 @@ public class PopularArticleAnalyzer {
     }
 
     public static void main(String args[]) {
+        Language simple = Language.getByLangCode("simple");
+        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper("/Users/ssen/wikAPIdia");
+        PopularArticleAnalyzer analyzer = new PopularArticleAnalyzer(wrapper);
+
+        System.out.println("most popular languages in " + simple);
+        for (LocalPage lp : analyzer.getMostPopular(simple, 50)) {
+            System.out.println("\t" + lp);
+        }
     }
 }

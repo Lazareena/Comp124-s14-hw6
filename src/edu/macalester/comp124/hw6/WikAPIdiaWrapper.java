@@ -107,8 +107,9 @@ public class WikAPIdiaWrapper {
 
     /**
      * Returns a list of the pages that represent the same concept in other languages.
+     *
      * @param page
-     * @return
+     * @return All pages that represent the same concept, INCLUDING the page passed as an argument.
      */
     public List<LocalPage> getInOtherLanguages(LocalPage page) {
         try {
@@ -126,6 +127,7 @@ public class WikAPIdiaWrapper {
                     }
                 }
             }
+            results.add(page);
             return results;
         } catch (DaoException e) {
             throw new RuntimeException(e);

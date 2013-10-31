@@ -17,4 +17,15 @@ You'll create them, loop over them, and search them.
 ## Getting started
 Fork and clone this repository.
 
+Copy the WikAPIdia directory into your users directory.
+
 If you are working on your laptop, you need to download the WikAPIdia database.
+
+Explain LocalPage and Language
+
+Tasks;
+1. Popular article analyzer
+2. Construct label
+3. Highlight
+
+Create small sample db with ~10K articles per languagex.

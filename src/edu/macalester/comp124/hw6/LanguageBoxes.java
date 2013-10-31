@@ -48,19 +48,19 @@ public class LanguageBoxes extends GCompound {
      * @param pages
      */
     public void highlightPages(List<LocalPage> pages) {
-        for (LocalPageBox box : boxes) {
-            if (pages.contains(box.getPage())) {
-                box.setFillColor(color);
-            } else {
-                box.setFillColor(ColorPallete.FADE);
-            }
-        }
+//        for (LocalPageBox box : boxes) {
+//            if (pages.contains(box.getPage())) {
+//                box.setFillColor(color);
+//            } else {
+//                box.setFillColor(ColorPallete.FADE);
+//            }
+//        }
     }
 
     public void unhighlight() {
-        for (LocalPageBox box : boxes) {
-            box.setFillColor(color);
-        }
+//        for (LocalPageBox box : boxes) {
+//            box.setFillColor(color);
+//        }
     }
 
     public Language getLanguage() {
