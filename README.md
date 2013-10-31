@@ -34,11 +34,11 @@ If you work on your laptop:
 Make sure that things are installed correctly:
 
 1. Open `PopularArticleAnalyzer.java` in IntelliJ
-2. Take a look at the main() method. It constructs a WikAPIdiaWrapper object. 
-3. The WikAPIdia wrapper object takes a String representing the parent directory of the "db" folder. 
+2. Take a look at the `main()` method. It constructs a `WikAPIdiaWrapper` object. 
+3. The `WikAPIdiaWrapper` constructor takes a String representing the parent directory of the `db` folder. 
 Change this to make it correct.
-This will be "/Users/<yourname>/wikAPIdia" on a lab computer, or your hw6 directory on your laptop.
-4. Run the class as an application (not Applet): PopularArticleAnalyzer.main(). 
+This will be `/Users/<yourname>/wikAPIdia` on a lab computer, or your `hw6` directory on your laptop.
+4. Run the class as an application (not Applet): `PopularArticleAnalyzer.main()`. 
 You should see information about the [Apple article](http://simple.wikipedia.org/wiki/Apple) in simple English Wikipedia.
 
 ## Get to know the existing algorithmic code:
@@ -58,9 +58,31 @@ For example, the concept of an apple is associated with the article
 [Apple's interlanguage link table](http://es.wikipedia.org/wiki/Manzana) lists the articles associated with Apple in every language.
 WikAPIdia stores a different LocalPage for each of these articles.
 
-Carefully study `WikAPIdiaWrapper`. Your code will rely heavily on it.
+Carefully study `WikAPIdiaWrapper`. Your code will rely heavily on it. In particular:
 
-## Task 1:
+ * How do you get a single LocalPage?
+ * How do you get all LocalPages in a language?
+ * Given a LocalPage in some Language (e.g. Apple in Simple English), how do you get the LocalPages in other languages linked to that LocalPage.
+ * Are there any methods that help you understand the "popularity" of a LocalPage (hint: yes).
+
+You'll need to understand all these things to get your program to work correctly.
+
+## Task 1: Find the most popular articles in each language.
+
+For this task, you'll complete the getMostPopular method of the PopularityAnalyzer class.
+Begin by doing writing a loop over all pages in a language and printing the popularity for each page.
+You'll need to use `WikAPIdiaWrapper` for both pieces of functionality.
+Note that you need to look for a measure of "popularity" provided by `WikAPIdiaWrapper`.
+Since PopularityAnalyzer does not extend acm's Program, you'll need to use System.out.println to print things to the console
+(note that this is the standard way Java programmers write messages to the console).
+
+To test your method, you'll need to change the `main()` method. First, construct a PopularityAnalyzer instance, 
+and then call the getMostPopular method on it.
+
+Once you are printing out your popularity scores for all articles, your next task is to capture them in a data structure and return them.
+I've given you a 
+Create an empty list that will contain LocalPagePopularity objects.
+
 Tasks;
 1. Popular article analyzer
 2. Construct label
