@@ -22,7 +22,7 @@ public class PopularArticleAnalyzer {
         this.wpApi = wpApi;
     }
 
-    public List<LocalPage> getMostPopular(Language language, int n) throws DaoException {
+    public List<LocalPage> getMostPopular(Language language, int n) {
         List<LocalPagePopularity> popularities = new ArrayList<LocalPagePopularity>();
         for (LocalPage lp : wpApi.getLocalPages(language)) {
             popularities.add(new LocalPagePopularity(lp, wpApi.getNumInLinks(lp)));
@@ -36,5 +36,8 @@ public class PopularArticleAnalyzer {
             result.add(popularities.get(i).getPage());
         }
         return result;
+    }
+
+    public static void main(String args[]) {
     }
 }

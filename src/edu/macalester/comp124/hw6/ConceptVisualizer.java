@@ -1,22 +1,29 @@
 package edu.macalester.comp124.hw6;
 
-import acm.graphics.GLabel;
+import acm.graphics.GDimension;
+import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.program.GraphicsProgram;
-import org.wikapidia.conf.ConfigurationException;
-import org.wikapidia.core.dao.DaoException;
 import org.wikapidia.core.lang.Language;
 import org.wikapidia.core.model.LocalPage;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.List;
 
 /**
+ * Visualizes the most popular concepts in each language,
+ * and the pages in other languages associated with the same concept.
+ *
+ * This class MUST be run as a Java application (ConceptVisualizer.main()).
+ * This class MUST be run from the module directory.
+ *
  * @author Shilad Sen
  */
 public class ConceptVisualizer extends GraphicsProgram {
-    private static final int PAGES_PER_LANG = 50;
+    private static final int PAGES_PER_LANG = 30;
     private WikAPIdiaWrapper wp;
 
     private static final Language SIMPLE = Language.getByLangCode("simple");
@@ -29,23 +36,26 @@ public class ConceptVisualizer extends GraphicsProgram {
     private FancyLabel label;
 
     public void init() {
-        setSize(800, 600);
+        try {
+            GImage bg = new GImage(ImageIO.read(getClass().getResource("/background.jpg")));
+            bg.setSize(new GDimension(800, 400));
+            add(bg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setSize(800, 400);
     }
 
     public void run() {
-        setSize(800, 600);
-        try {
-            wp = new WikAPIdiaWrapper();
-            label = new FancyLabel("FOo bar\nbaz");
-            add(label, 20, 20);
-            simpleBoxes = makeBoxes(SIMPLE, Color.GREEN, 300);
-            hindiBoxes = makeBoxes(HINDI, Color.RED, 400);
-            latinBoxes = makeBoxes(LATIN, Color.BLUE, 500);
-        } catch (ConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
+        setSize(800, 400);
+        wp = new WikAPIdiaWrapper(WikAPIdiaWrapper.PATH_LAPTOP);
+        label = new FancyLabel("Hover over a title to analyze it");
+        label.setColor(ColorPallete.FONT_COLOR);
+
+        add(label, 20, 20);
+        simpleBoxes = makeBoxes(SIMPLE, ColorPallete.COLOR1, 150);
+        hindiBoxes = makeBoxes(HINDI, ColorPallete.COLOR2, 225);
+        latinBoxes = makeBoxes(LATIN, ColorPallete.COLOR3, 300);
         addMouseListeners();
     }
 
@@ -54,38 +64,34 @@ public class ConceptVisualizer extends GraphicsProgram {
         GObject o = getElementAt(e.getX(), e.getY());
         if (o instanceof LanguageBoxes) {
             LanguageBoxes boxes = (LanguageBoxes)o;
-            LocalPageBox box = boxes.getLocalBoxAt(e.getX() - boxes.getX(), e.getY() - boxes.getY());
+            LocalPageBox box = boxes.getLocalBoxAt(e.getX(), e.getY());
             if (box == null) {
-                simpleBoxes.restoreColors();
-                latinBoxes.restoreColors();
-                hindiBoxes.restoreColors();
+                simpleBoxes.unhighlight();
+                latinBoxes.unhighlight();
+                hindiBoxes.unhighlight();
                 label.setText("");
             } else {
-                try {
-                    List<LocalPage> pages = wp.getInOtherLanguages(box.getPage());
-                    pages.add(box.getPage());
-                    simpleBoxes.highlightPages(pages);
-                    latinBoxes.highlightPages(pages);
-                    hindiBoxes.highlightPages(pages);
+                List<LocalPage> pages = wp.getInOtherLanguages(box.getPage());
+                pages.add(box.getPage());
+                simpleBoxes.highlightPages(pages);
+                latinBoxes.highlightPages(pages);
+                hindiBoxes.highlightPages(pages);
 
-                    String description = "";
-                    for (LocalPage lp : pages) {
-                        description += lp.getLanguage() + ": " + lp.getTitle().getTitleStringWithoutNamespace() + "\n";
-                    }
-                    label.setText(description);
-                } catch (DaoException e1) {
-                    e1.printStackTrace();
+                String description = "";
+                for (LocalPage lp : pages) {
+                    description += lp.getLanguage() + ": " + lp.getTitle().getTitleStringWithoutNamespace() + "\n";
                 }
+                label.setText(description);
             }
         } else {
-            simpleBoxes.restoreColors();
-            latinBoxes.restoreColors();
-            hindiBoxes.restoreColors();
+            simpleBoxes.unhighlight();
+            latinBoxes.unhighlight();
+            hindiBoxes.unhighlight();
             label.setText("");
         }
     }
 
-    public LanguageBoxes makeBoxes(Language language, Color color, int y) throws DaoException {
+    public LanguageBoxes makeBoxes(Language language, Color color, int y) {
         PopularArticleAnalyzer analyzer = new PopularArticleAnalyzer(wp);
         List<LocalPage> popular = analyzer.getMostPopular(language, PAGES_PER_LANG);
         LanguageBoxes boxes = new LanguageBoxes(color, language, popular);

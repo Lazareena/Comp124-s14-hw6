@@ -7,6 +7,8 @@ import org.wikapidia.core.model.LocalPage;
 import java.awt.*;
 
 /**
+ * A box that represents a local page.
+ *
  * @author Shilad Sen
  */
 public class LocalPageBox extends GCompound {
@@ -26,15 +28,19 @@ public class LocalPageBox extends GCompound {
         add(grect);
     }
 
+    /**
+     * Returns the page associated with this box.
+     * @return
+     */
     public LocalPage getPage() {
         return page;
     }
 
-    public void fadeOut() {
-        grect.setFillColor(Color.LIGHT_GRAY);
-    }
-
-    public void fadeIn() {
+    /**
+     * Sets the color of the rectangle.
+     * @param color
+     */
+    public void setFillColor(Color color) {
         grect.setFillColor(color);
     }
 }
