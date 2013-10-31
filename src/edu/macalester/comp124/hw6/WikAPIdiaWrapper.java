@@ -1,6 +1,7 @@
 package edu.macalester.comp124.hw6;
 
 import org.apache.commons.collections.IteratorUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.wikapidia.conf.ConfigurationException;
 import org.wikapidia.core.cmd.Env;
 import org.wikapidia.core.cmd.EnvBuilder;
@@ -10,6 +11,7 @@ import org.wikapidia.core.lang.LanguageSet;
 import org.wikapidia.core.lang.LocalId;
 import org.wikapidia.core.model.LocalPage;
 import org.wikapidia.core.model.NameSpace;
+import org.wikapidia.core.model.Title;
 import org.wikapidia.core.model.UniversalPage;
 
 import java.io.File;
@@ -44,7 +46,10 @@ public class WikAPIdiaWrapper {
      */
     public WikAPIdiaWrapper(String baseDir) {
         try {
-            File dbDir = new File(baseDir, "db");
+            File dbDir = new File(baseDir);
+            if (FilenameUtils.getBaseName(dbDir.getAbsolutePath()).equals("db")) {
+                dbDir = new File(dbDir, "db");
+            }
             if (!dbDir.isDirectory()) {
                 System.err.println(
                         "Database directory " + dbDir + " does not exist." +
@@ -53,7 +58,10 @@ public class WikAPIdiaWrapper {
                 );
                 System.exit(1);
             }
-            env = new EnvBuilder().setBaseDir(new File(baseDir)).build();
+            env = new EnvBuilder()
+                    .setProperty("dao.dataSource.h2db.url", "jdbc:h2:" + baseDir + "/db/h2")
+                    .setBaseDir(new File(baseDir))
+                    .build();
             this.rpDao = env.getConfigurator().get(RawPageDao.class);
             this.lpDao = env.getConfigurator().get(LocalPageDao.class);
             this.llDao = env.getConfigurator().get(LocalLinkDao.class);
@@ -69,6 +77,17 @@ public class WikAPIdiaWrapper {
     public List<Language> getLanguages() {
         LanguageSet lset = env.getLanguages();
         return new ArrayList<Language>(lset.getLanguages());
+    }
+
+    /**
+     * Returns a local page with a particular title.
+     */
+    public LocalPage getLocalPageByTitle(Language language, String title) {
+        try {
+            return lpDao.getByTitle(language, new Title(title, language), NameSpace.ARTICLE);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -134,15 +153,17 @@ public class WikAPIdiaWrapper {
         }
     }
 
+    /**
+     * Returns the wiki markup of a page with some text.
+     *
+     * @param page
+     * @return
+     */
     public String getPageText(LocalPage page) {
         try {
             return rpDao.getById(page.getLanguage(), page.getLocalId()).getBody();
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void main(String args[]) {
-
     }
 }

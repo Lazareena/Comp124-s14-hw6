@@ -17,7 +17,9 @@ You'll create them, loop over them, and search them.
 ## Getting started
 Fork and clone this repository.
 
-Copy the WikAPIdia directory into your users directory.
+On lab computers:
+Create a directory called wikAPIdia in /Users/<your name>/
+Copy the WikAPIdia directory into your odirectory.
 
 If you are working on your laptop, you need to download the WikAPIdia database.
 

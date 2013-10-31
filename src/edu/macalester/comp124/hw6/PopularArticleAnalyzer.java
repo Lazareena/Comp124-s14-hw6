@@ -40,6 +40,9 @@ public class PopularArticleAnalyzer {
 
     public static void main(String args[]) {
         Language simple = Language.getByLangCode("simple");
+
+        // Change the path below to point to the directory on the lab computer
+        // or laptop that holds the BIG "db" directory.
         WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper("/Users/ssen/wikAPIdia");
         PopularArticleAnalyzer analyzer = new PopularArticleAnalyzer(wrapper);
 
