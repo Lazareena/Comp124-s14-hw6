@@ -17,14 +17,28 @@ You'll create them, loop over them, and search them.
 ## Getting started
 Fork and clone this repository.
 
-On lab computers:
-Create a directory called wikAPIdia in /Users/<your name>/
-Copy the WikAPIdia directory into your odirectory.
+If you work on lab computers:
 
-If you are working on your laptop, you need to download the WikAPIdia database.
+1. Create a directory called /Users/<your name>/wikAPIdia
+2. Copy the /db directory on the lab macs into the directory you created.
 
-Explain LocalPage and Language
+If you work on your laptop:
 
+1. Download the compressed 1.5 GB [WikAPIdia database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.tar.bz2).
+2. Uncompress the file, you'll find a directory called "db"
+3. Move the directory under your hw6 directory
+
+Make sure that things are installed correctly:
+
+1. Open PopularArticleAnalyzer.java in IntelliJ
+2. Take a look at the main() method. It constructs a WikAPIdiaWrapper object. 
+3. The WikAPIdia wrapper object takes a String representing the parent directory of the "db" folder. 
+Change this to make it correct.
+This will be "/Users/<yourname>/wikAPIdia" on a lab computer, or your hw6 directory on your laptop.
+4. Run the class as an application (not Applet): PopularArticleAnalyzer.main(). 
+You should see information about the [Apple article](http://simple.wikipedia.org/wiki/Apple) in simple English Wikipedia.
+
+## Task 1:
 Tasks;
 1. Popular article analyzer
 2. Construct label
