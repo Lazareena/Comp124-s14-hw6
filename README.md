@@ -88,9 +88,14 @@ In the `getMostPopular` method, create an empty list that will contain LocalPage
 As you iterate over the `LocalPage` objects and calculate their popularity, create a LocalPagePopularity instance and
 add it to your list.
 
-Tasks;
-1. Popular article analyzer
-2. Construct label
-3. Highlight
+Finally, you need to sort the list you created by popularity and return the most popular items.
+To do this, you'll need to use `Collections.sort`, and perhaps `Collections.reverse`.
+Go look at the Javadoc for these classes to see how to use them.
+`Collections.sort` needs to know *how* to sort the elements in the list.
+It does so by treating the objects it is sorting as `Comparable`.
+Read the javadoc for Comparable, and look at this [Stackoverflow post](http://stackoverflow.com/questions/3718383/java-class-implements-comparable) about it.
 
-Create small sample db with ~10K articles per languagex.
+You need to:
+1. Implement meaningful Comparable method for LocalPagePopularity.
+2. Sort the list you created.
+3. Return a list containing the first n most popular items (read the Javadoc for sublist).
