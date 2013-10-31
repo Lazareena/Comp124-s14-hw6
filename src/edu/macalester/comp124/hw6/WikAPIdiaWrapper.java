@@ -25,7 +25,7 @@ import java.util.List;
  * @author Shilad Sen
  */
 public class WikAPIdiaWrapper {
-    public static final String PATH_LAPTOP = "wikAPIdia";
+    public static final String PATH_LAPTOP = ".";
     public static final String PATH_LAB = "wikAPIdia";
 
     private static final int CONCEPT_ALGORITHM_ID = 1;
@@ -44,7 +44,16 @@ public class WikAPIdiaWrapper {
      */
     public WikAPIdiaWrapper(String baseDir) {
         try {
-            env = new EnvBuilder().setBaseDir(new File("wikAPIdia")).build();
+            File dbDir = new File(baseDir, "db");
+            if (!dbDir.isDirectory()) {
+                System.err.println(
+                        "Database directory " + dbDir + " does not exist." +
+                        "Have you downloaded and extracted the database?" +
+                        "Are you running the program from the right directory?"
+                );
+                System.exit(1);
+            }
+            env = new EnvBuilder().setBaseDir(new File(baseDir)).build();
             this.rpDao = env.getConfigurator().get(RawPageDao.class);
             this.lpDao = env.getConfigurator().get(LocalPageDao.class);
             this.llDao = env.getConfigurator().get(LocalLinkDao.class);
