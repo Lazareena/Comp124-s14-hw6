@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is a wrapper I wrote around the WikAPIdia API for COMP 124.
+ * Shilad wrote this wrapper around the WikAPIdia API for COMP 124.
  *
  * The design strives to be understandable to intro students, so parts of it may seem
  * awkward to experienced Java programmers.
@@ -39,7 +39,7 @@ public class WikAPIdiaWrapper {
     /**
      * Creates a new wrapper object with default configuration settings.
      *
-     * baseDir should be the parent directory containing the "db" directory.
+     * baseDir should be the parent "wikAPIdia" directory containing the "db" directory.
      * You must have read / write permissions in this directory.
      */
     public WikAPIdiaWrapper(String baseDir) {
