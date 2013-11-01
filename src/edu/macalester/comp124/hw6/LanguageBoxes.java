@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A list of boxes for local pages in some language.
+ * A row of boxes for local pages in some language.
  *
  * @author Shilad Sen
  */
@@ -71,6 +71,12 @@ public class LanguageBoxes extends GCompound {
         return boxes;
     }
 
+    /**
+     * Returns the local page box at some location.
+     * @param x
+     * @param y
+     * @return
+     */
     public LocalPageBox getLocalBoxAt(double x, double y) {
         GPoint p = getLocation();
         return (LocalPageBox) getElementAt(x - p.getX(), y - p.getY());

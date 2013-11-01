@@ -45,20 +45,19 @@ public class WikAPIdiaWrapper {
     public WikAPIdiaWrapper(String baseDir) {
         try {
             File dbDir = new File(baseDir);
-            if (FilenameUtils.getBaseName(dbDir.getAbsolutePath()).equals("db")) {
+            if (!FilenameUtils.getBaseName(dbDir.getAbsolutePath()).equals("db")) {
                 dbDir = new File(dbDir, "db");
             }
             if (!dbDir.isDirectory()) {
                 System.err.println(
                         "Database directory " + dbDir + " does not exist." +
-                        "Have you downloaded and extracted the database?" +
-                        "Are you running the program from the right directory?"
+                                "Have you downloaded and extracted the database?" +
+                                "Are you running the program from the right directory?"
                 );
                 System.exit(1);
             }
             env = new EnvBuilder()
-                    .setProperty("dao.dataSource.h2db.url", "jdbc:h2:" + baseDir + "/db/h2")
-                    .setBaseDir(new File(baseDir))
+                    .setBaseDir(dbDir.getParent())
                     .build();
             this.rpDao = env.getConfigurator().get(RawPageDao.class);
             this.lpDao = env.getConfigurator().get(LocalPageDao.class);
