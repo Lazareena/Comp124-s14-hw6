@@ -74,7 +74,14 @@ You'll need to understand all these things to get your program to work correctly
 ## Task 1: Find the most popular articles in each language.
 
 For this task, you'll complete the getMostPopular method of the PopularityAnalyzer class.
-Begin by doing writing a loop over all pages in a language and printing the popularity for each page.
+
+In short, you need to:
+1. Build a list capturing the popularity for each local page.
+2. Sort the list you created.
+3. Return a list containing the first n most popular items (read the Javadoc for sublist).
+4. Add code to the `main()` method to call your new method.
+
+Begin looping over all pages in a language and printing the popularity for each page.
 You'll need to use `WikAPIdiaWrapper` for both pieces of functionality.
 Note that you need to look for a measure of "popularity" provided by `WikAPIdiaWrapper`.
 Since PopularityAnalyzer does not extend acm's Program, you'll need to use System.out.println to print things to the console
@@ -87,19 +94,15 @@ Once you are printing out your popularity scores for all articles, your next tas
 To find the most popular pages, you'll need to remember the popularity of each page.
 I've given you a class called `LocalPagePopularity` that will help do this. 
 It's a container for a local page and its popularity. 
-
 In the `getMostPopular` method, create an empty list that will contain LocalPagePopularity objects.
 As you iterate over the `LocalPage` objects and calculate their popularity, create a LocalPagePopularity instance and
 add it to your list.
 
-Finally, you need to sort the list you created by popularity and return the most popular items.
+Next, you need to sort the list you created by popularity and return the most popular items.
 To do this, you'll need to use `Collections.sort`, and perhaps `Collections.reverse`.
 Go look at the Javadoc for these classes to see how to use them.
 `Collections.sort` needs to know *how* to sort the elements in the list.
 It does so by treating the objects it is sorting as `Comparable`.
 Read the javadoc for Comparable, and look at this [Stackoverflow post](http://stackoverflow.com/questions/3718383/java-class-implements-comparable) about it.
 
-You need to:
-1. Implement meaningful Comparable method for LocalPagePopularity.
-2. Sort the list you created.
-3. Return a list containing the first n most popular items (read the Javadoc for sublist).
+Finally, enhance the `main()` method so that it prints (using System.out.println) the titles for the most popular pages in simple english.
