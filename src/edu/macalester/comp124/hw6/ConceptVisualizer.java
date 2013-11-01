@@ -23,19 +23,32 @@ import java.util.List;
  * @author Shilad Sen
  */
 public class ConceptVisualizer extends GraphicsProgram {
+    // The data directory for WikAPIdia.
+    // Change this so it is correct for your laptop
+    private static final String DATA_DIRECTORY = "./wikAPIdia";
     private static final int PAGES_PER_LANG = 30;
-    private WikAPIdiaWrapper wp;
 
+    // The three languages loaded in the database
     private static final Language SIMPLE = Language.getByLangCode("simple");
     private static final Language HINDI = Language.getByLangCode("hi");
     private static final Language LATIN = Language.getByLangCode("la");
 
+    // The Wikapidia API object
+    private WikAPIdiaWrapper wp;
+
     private LanguageBoxes simpleBoxes;
     private LanguageBoxes latinBoxes;
     private LanguageBoxes hindiBoxes;
+
+    // Descriptive label
     private FancyLabel label;
 
+    /**
+     * Lays out the graphic components of the widget.
+     */
     public void init() {
+        setSize(800, 400);
+        wp = new WikAPIdiaWrapper("./wikAPIdia");
         try {
             GImage bg = new GImage(ImageIO.read(getClass().getResource("/background.jpg")));
             bg.setSize(new GDimension(800, 400));
@@ -43,12 +56,6 @@ public class ConceptVisualizer extends GraphicsProgram {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setSize(800, 400);
-    }
-
-    public void run() {
-        setSize(800, 400);
-        wp = new WikAPIdiaWrapper("/Users/ssen/wikAPIdia");
         label = new FancyLabel("Hover over a title to analyze it");
         label.setColor(ColorPallete.FONT_COLOR);
 
@@ -57,53 +64,75 @@ public class ConceptVisualizer extends GraphicsProgram {
         hindiBoxes = makeBoxes(HINDI, ColorPallete.COLOR2, 225);
         latinBoxes = makeBoxes(LATIN, ColorPallete.COLOR3, 300);
         addMouseListeners();
+        super.init();
+    }
+
+    public void run() {
+        super.run();
+        setSize(800, 400);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        GObject o = getElementAt(e.getX(), e.getY());
-        if (o instanceof LanguageBoxes) {
-            LanguageBoxes boxes = (LanguageBoxes)o;
-            LocalPageBox box = boxes.getLocalBoxAt(e.getX(), e.getY());
-            if (box == null) {
-                simpleBoxes.unhighlight();
-                latinBoxes.unhighlight();
-                hindiBoxes.unhighlight();
-                label.setText("");
-            } else {
-                List<LocalPage> pages = null;
-                String description = "";
+        LocalPage hoverPage = getPageAt(e.getX(), e.getY());
 
-                LocalPage lp = box.getPage();
-                System.out.println("You hovered over " + lp);
-
-                // Get all pages representing the same concept.
-                // Build up a textual description of the pages in each language.
-                // You can insert line breaks in your textual description using newlines ("\n").
-                pages = wp.getInOtherLanguages(lp);
-                for (LocalPage lp2 : pages) {
-                    description += lp2.getLanguage() + ": " + lp2.getTitle() + "\n";
-                }
-
-                label.setText(description);
-                simpleBoxes.highlightPages(pages);
-                latinBoxes.highlightPages(pages);
-                hindiBoxes.highlightPages(pages);
-            }
-        } else {
+        if (hoverPage == null) {
             simpleBoxes.unhighlight();
             latinBoxes.unhighlight();
             hindiBoxes.unhighlight();
-            label.setText("");
+            label.setText("Hover over a title to analyze it");
+        } else {
+            List<LocalPage> pages = null;
+            String description = "";
+
+            System.out.println("You hovered over " + hoverPage);
+            // TODO:
+            // Get pages representing the same concept in other languages.
+            // Build up a textual description of the pages in each language.
+            // You can insert line breaks in your textual description using newlines ("\n").
+            pages = wp.getInOtherLanguages(hoverPage);
+            for (LocalPage lp2 : pages) {
+                description += lp2.getLanguage() + ": " + lp2.getTitle() + "\n";
+            }
+
+            label.setText(description);
+            simpleBoxes.highlightPages(pages);
+            latinBoxes.highlightPages(pages);
+            hindiBoxes.highlightPages(pages);
         }
     }
 
-    public LanguageBoxes makeBoxes(Language language, Color color, int y) {
+    /**
+     * Creates boxes for a particular language.
+     * @param language
+     * @param color
+     * @param y
+     * @return
+     */
+    private LanguageBoxes makeBoxes(Language language, Color color, int y) {
         PopularArticleAnalyzer analyzer = new PopularArticleAnalyzer(wp);
         List<LocalPage> popular = analyzer.getMostPopular(language, PAGES_PER_LANG);
         LanguageBoxes boxes = new LanguageBoxes(color, language, popular);
         add(boxes, 20, y);
         return boxes;
+    }
+
+    /**
+     * Returns the page at an x, y location
+     * @param x
+     * @param y
+     * @return
+     */
+    private LocalPage getPageAt(double x, double y) {
+        GObject o = getElementAt(x, y);
+        if (o instanceof LanguageBoxes) {
+            LanguageBoxes boxes = (LanguageBoxes)o;
+            LocalPageBox box = boxes.getLocalBoxAt(x, y);
+            if (box != null) {
+                return box.getPage();
+            }
+        }
+        return null;
     }
 
     public static void main(String args[]) {
