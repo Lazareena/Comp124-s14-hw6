@@ -30,6 +30,7 @@ We will setup two databases drawn from the Simple English, Latin, and Hindi Wiki
  * The small-WikAPIdia database contains a small subset of the pages (about 20,000).
 
 You will want to use the small database to reduce the startup time of your program during testing.
+However, you will ocassionaly want to revel in the glory of the full database.
 
 If you work on lab computers:
 
