@@ -44,23 +44,19 @@ public class LanguageBoxes extends GCompound {
     }
 
     /**
-     * Highlights
+     * Highlights the specified pages (i.e. colors them "normal").
+     * All other pages should be colored gray.
      * @param pages
      */
     public void highlightPages(List<LocalPage> pages) {
-        for (LocalPageBox box : boxes) {
-            if (pages.contains(box.getPage())) {
-                box.setFillColor(color);
-            } else {
-                box.setFillColor(ColorPallete.FADE);
-            }
-        }
+        // TODO: implement me for part 3
     }
 
+    /**
+     * Colors all pages "normally."
+     */
     public void unhighlight() {
-        for (LocalPageBox box : boxes) {
-            box.setFillColor(color);
-        }
+        // TODO: implement me for part 3
     }
 
     public Language getLanguage() {

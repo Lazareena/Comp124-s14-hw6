@@ -90,12 +90,9 @@ public class ConceptVisualizer extends GraphicsProgram {
             // Get pages representing the same concept in other languages.
             // Build up a textual description of the pages in each language.
             // You can insert line breaks in your textual description using newlines ("\n").
-            pages = wp.getInOtherLanguages(hoverPage);
-            for (LocalPage lp2 : pages) {
-                description += lp2.getLanguage() + ": " + lp2.getTitle() + "\n";
-            }
 
             label.setText(description);
+
             simpleBoxes.highlightPages(pages);
             latinBoxes.highlightPages(pages);
             hindiBoxes.highlightPages(pages);

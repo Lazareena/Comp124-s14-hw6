@@ -33,19 +33,7 @@ public class PopularArticleAnalyzer {
      * @return
      */
     public List<LocalPage> getMostPopular(Language language, int n) {
-        List<LocalPagePopularity> popularities = new ArrayList<LocalPagePopularity>();
-        for (LocalPage lp : wpApi.getLocalPages(language)) {
-            popularities.add(new LocalPagePopularity(lp, wpApi.getNumInLinks(lp)));
-        }
-
-        Collections.sort(popularities);
-        Collections.reverse(popularities);
-
-        List<LocalPage> result = new ArrayList<LocalPage>();
-        for (int i = 0; i < n; i++) {
-            result.add(popularities.get(i).getPage());
-        }
-        return result;
+        return null;    // TODO: implement me for part 1
     }
 
     public static void main(String args[]) {
@@ -63,7 +51,7 @@ public class PopularArticleAnalyzer {
         }
         System.out.println("page is " + page);
 
-        // TODO:
+        // TODO: Complete me for part 1.
         // construct a PopularArticleAnalyzer
         // Print out the 20 most popular articles in the language.
         // United states should be #1
