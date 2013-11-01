@@ -18,10 +18,20 @@ import java.util.List;
 public class PopularArticleAnalyzer {
     private final WikAPIdiaWrapper wpApi;
 
+    /**
+     * Constructs a new analyzer.
+     * @param wpApi
+     */
     public PopularArticleAnalyzer(WikAPIdiaWrapper wpApi) {
         this.wpApi = wpApi;
     }
 
+    /**
+     * Returns the n most popular articles in the specified language.
+     * @param language
+     * @param n
+     * @return
+     */
     public List<LocalPage> getMostPopular(Language language, int n) {
         List<LocalPagePopularity> popularities = new ArrayList<LocalPagePopularity>();
         for (LocalPage lp : wpApi.getLocalPages(language)) {
