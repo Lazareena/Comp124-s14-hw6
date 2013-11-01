@@ -111,7 +111,7 @@ Finally, enhance the `main()` method so that it prints (using System.out.println
 
 For task 2, you'll create a text label describing the element the user is hovering over:
 
-![alt tag](https://raw.github.com/mac-comp124-f13/hw6/master/screenshot.png?login=shilad&token=9ab528c59d524400fd585d7b5f8ac53b)
+![alt tag](https://raw.github.com/mac-comp124-f13/hw6/master/description.png?login=shilad&token=8940aaab03f8bd16d0a42fb6a5d1f967)
 
 For this task, you'll complete all your work in `ConceptVisualizer` class in the `mouseMoved` event handler.
 
@@ -124,3 +124,21 @@ First, you need to retrieve the list of `LocalPage`s associated with the page be
 Look for a method to help you in `WikAPIdiaWrapper`.
 Next, you'll construct a textual description of the pages associated with the concept as shown above and change the text of the label to your description.
 You can insert line breaks in your description using the java newline character `"\n"`.
+
+## Task 3: Implement highlighting on hovers
+
+Finally, you'll highlight the box the user is hovering over, along with boxes in other languages associated with the same concept.
+
+For this task, all your code will be in `LanguageBoxes.highlightPages` and `LanguageBoxes.unhighlight`.
+Notice that these methods are already called in `ConceptVisualizer.mouseEvent`. 
+You just need to make them work!
+
+For `highlightPages` you'll need to check each box.
+Retrieve the `LocalPage` associated with the box and check if the passed-in list contains it.
+If it does, highlight it with the "normal" color. If not, color it gray.
+I've created a method to let you set the color of a LocalPageBox to help.
+
+The `unhighlight` method will simply restore all boxes to their "normal" color.
+
+## Extra credit
+There are many, many ways to improve this visualization or make it more beautiful. Implement one!
