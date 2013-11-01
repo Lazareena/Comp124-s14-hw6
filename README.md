@@ -28,27 +28,33 @@ We will setup two databases drawn from the Simple English, Latin, and Hindi Wiki
 
  * The (full) WikAPIdia database contains all approximately 300,000 pages.
  * The small-WikAPIdia database contains a small subset of the pages (about 20,000).
-
+ 
 You will want to use the small database to reduce the startup time of your program during testing.
-However, you will ocassionaly want to revel in the glory of the full database.
+However, you will occasionally want to revel in the glory of the full database.
+
+We now need to setup two data directories (one for each dataset). At the end of these steps, the following directories will exist:
+```
+/some/path/wikAPIdia/db
+/some/path/wikAPIdia-small/db
+```
+The path preceding `wikAPIdia` and `wikAPIdia-small` will change depending on whether you on a lab machine or your own laptop.
+**Do not put these datasets on your H: drive!** Your H: drive will fill up, and your program will slow down drastically.
 
 If you work on lab computers:
 
 1. Create a directory called `/Users/<your name>/wikAPIdia`
 2. Copy the `/db` directory on the lab macs into the directory you created.
 3. Create a directory called `/Users/<your name>/wikAPIdia-small`.
-4. Download the compressed 130MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.small.tar.bz2)
-5. Extract the small database into the wikAPIdia-small directory (it will also contain a `db` now).
+4. Download the compressed 130MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.small.tar.bz2) and extract the small database into the `wikAPIdia-small` directory (it will also contain a `db` now).
+6. The full path to the newly installed db directories should be: `/Users/<your name>/wikAPIdia/db` and `/Users/<your name>/wikAPIdia-small/db`. 
 
 If you work on your laptop:
 
 1. Download the compressed 1.5 GB [WikAPIdia database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.tar.bz2).
 2. Uncompress the file, you'll find a directory called "db"
 3. Move the directory under the wikAPIdia directory with your hw6 directory. 
-4. Download the compressed 130MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.small.tar.bz2)
-5. Extract the small database into the wikAPIdia-small directory in hw6 (it will also contain a `db` now).
-
-The full path to the newly installed db directories should be: "some_path/hw6/wikAPIdia/db" and "some_path/hw6/wikAPIdia-small/db" 
+4. Download the compressed 130MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.small.tar.bz2) and extract the small database into the wikAPIdia-small directory in hw6 (it will also contain a `db` now).
+6. The full path to the newly installed db directories should be: `idea_project_directory/hw6/wikAPIdia/db` and `idea_project_directory/hw6/wikAPIdia-small/db`. 
 
 Make sure that things are installed correctly:
 
