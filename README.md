@@ -24,17 +24,31 @@ to make your life easier.
 ## Getting started
 Fork and clone this repository.
 
+We will setup two databases drawn from the Simple English, Latin, and Hindi Wikipedias:
+
+ * The (full) WikAPIdia database contains all approximately 300,000 pages.
+ * The small-WikAPIdia database contains a small subset of the pages (about 20,000).
+
+You will want to use the small database to reduce the startup time of your program during testing.
+However, you will ocassionaly want to revel in the glory of the full database.
+
 If you work on lab computers:
 
 1. Create a directory called `/Users/<your name>/wikAPIdia`
 2. Copy the `/db` directory on the lab macs into the directory you created.
+3. Create a directory called `/Users/<your name>/wikAPIdia-small`.
+4. Download the compressed 130MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.small.tar.bz2)
+5. Extract the small database into the wikAPIdia-small directory (it will also contain a `db` now).
 
 If you work on your laptop:
 
 1. Download the compressed 1.5 GB [WikAPIdia database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.tar.bz2).
 2. Uncompress the file, you'll find a directory called "db"
 3. Move the directory under the wikAPIdia directory with your hw6 directory. 
-The full path to the newly installed db directory should be: "some_path/hw6/wikAPIdia/db"
+4. Download the compressed 130MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.small.tar.bz2)
+5. Extract the small database into the wikAPIdia-small directory in hw6 (it will also contain a `db` now).
+
+The full path to the newly installed db directories should be: "some_path/hw6/wikAPIdia/db" and "some_path/hw6/wikAPIdia-small/db" 
 
 Make sure that things are installed correctly:
 
@@ -42,7 +56,7 @@ Make sure that things are installed correctly:
 2. Take a look at the `main()` method. It constructs a `WikAPIdiaWrapper` object. 
 3. The `WikAPIdiaWrapper` constructor takes a String representing the `wikAPIdia` directory that contains your db directory.
 Change this to make it correct.
-This will be `/Users/<yourname>/wikAPIdia` on a lab computer, or your `hw6/wikAPIdia` directory on your laptop.
+This will be `/Users/<yourname>/wikAPIdia-small` on a lab computer, or your `hw6/wikAPIdia-small` directory on your laptop.
 4. Run the class as an application (not Applet): `PopularArticleAnalyzer.main()`. 
 You should see information about the [Apple article](http://simple.wikipedia.org/wiki/Apple) in simple English Wikipedia.
 
