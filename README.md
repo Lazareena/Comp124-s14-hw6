@@ -74,8 +74,8 @@ You'll need to understand all these things to get your program to work correctly
 ## Task 1: Find the most popular articles in each language.
 
 For this task, you'll complete the getMostPopular method of the PopularityAnalyzer class.
-
 In short, you need to:
+
 1. Build a list capturing the popularity for each local page.
 2. Sort the list you created.
 3. Return a list containing the first n most popular items (read the Javadoc for sublist).
@@ -106,3 +106,21 @@ It does so by treating the objects it is sorting as `Comparable`.
 Read the javadoc for Comparable, and look at this [Stackoverflow post](http://stackoverflow.com/questions/3718383/java-class-implements-comparable) about it.
 
 Finally, enhance the `main()` method so that it prints (using System.out.println) the titles for the most popular pages in simple english.
+
+## Task 2: Implement the text label at the top of the visualization.
+
+For task 2, you'll create a text label describing the element the user is hovering over:
+
+![alt tag](https://raw.github.com/mac-comp124-f13/hw6/master/screenshot.png?login=shilad&token=9ab528c59d524400fd585d7b5f8ac53b)
+
+For this task, you'll complete all your work in `ConceptVisualizer` class in the `mouseMoved` event handler.
+
+Take a look at the existing event handler. 
+You'll see that the event handler now prints the page being hovered over to the console.
+You'll want to construct a String describing what is happening in the visualization, and set the text in the label to it.
+You'll do this in two steps. 
+
+First, you need to retrieve the list of `LocalPage`s associated with the page being hovered over.
+Look for a method to help you in `WikAPIdiaWrapper`.
+Next, you'll construct a textual description of the pages associated with the concept as shown above and change the text of the label to your description.
+You can insert line breaks in your description using the java newline character `"\n"`.
