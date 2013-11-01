@@ -41,7 +41,7 @@ public class PopularArticleAnalyzer {
 
         // Change the path below to point to the parent directory on the lab computer
         // or laptop that holds the BIG "db" directory.
-        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper("./wikAPIdia");
+        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper("./wikAPIdia-small");
 
         // A simple test of the WikAPIdia wrapper.
         LocalPage page = wrapper.getLocalPageByTitle(simple, "Apple");
