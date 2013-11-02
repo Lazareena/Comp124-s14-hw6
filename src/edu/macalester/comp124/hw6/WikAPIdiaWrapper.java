@@ -81,7 +81,7 @@ public class WikAPIdiaWrapper {
      */
     public LocalPage getLocalPageByTitle(Language language, String title) {
         try {
-            return lpDao.getByTitle(language, new Title(title, language), NameSpace.ARTICLE);
+            return lpDao.getByTitle(new Title(title, language), NameSpace.ARTICLE);
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }

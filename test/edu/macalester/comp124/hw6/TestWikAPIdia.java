@@ -27,7 +27,7 @@ public class TestWikAPIdia {
         System.out.println("loaded languages are " + env.getLanguages());
         LocalPageDao dao = env.getConfigurator().get(LocalPageDao.class);
         Language simple = Language.getByLangCode("simple");
-        LocalPage page = dao.getByTitle(simple, new Title("Barack Obama", simple), NameSpace.ARTICLE);
+        LocalPage page = dao.getByTitle(new Title("Barack Obama", simple), NameSpace.ARTICLE);
         assertNotNull(page);
     }
 }
