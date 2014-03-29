@@ -10,7 +10,7 @@ As you work on this assignment, you'll practice interacting with java Lists.
 You'll create them, loop over them, and search them.
 
 Your finished program will look like:
-![alt tag](./screenshot.png?login=shilad&token=9ab528c59d524400fd585d7b5f8ac53b)
+![alt tag](./screenshot.png)
 
 In this visualization, each row of boxes represents the most popular Wikipedia articles in a particular language (Simple English, Hindi, Latin).
 The user of this visualization is hovering their cursor over the Hindi article for "United States", and it is highlighted in purple.
@@ -40,13 +40,13 @@ We now need to setup two data directories (one for each dataset). At the end of 
 **Do not put these datasets on your H: drive!** Your H: drive will fill up, and your program will slow down drastically.
 
 1. Create a directory called "wp". if you are working on a lab computer, you should place it in `/Users/<your name>/wp`. If you are on a laptop, you can place it anywhere.
-1. Download the compressed 66MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wp-db-small.zip), unzip it, and place the extracted "wp-db-small" directory inside the `wp` directory you created in the previous step.
-4. Repeat this process for the 563MB [WikAPIdia-large database](http://macademia.macalester.edu/shilad/wp-db-large.zip). It should result in a wp-db-large file in the same `wp` directory.
+1. Download the compressed 66MB [WikAPIdia-small database](http://www.shilad.com/wp-db-small.zip), unzip it, and place the extracted "wp-db-small" directory inside the `wp` directory you created in the previous step.
+4. Repeat this process for the 563MB [WikAPIdia-large database](http://www.shilad.com/wp-db-large.zip). It should result in a wp-db-large file in the same `wp` directory.
 
 Make sure that things are installed correctly:
 
 1. Open the `WikAPIdiaWrapper.java` file in IntelliJ.
-2. Update the `DATA_DIRECTORY` variable to point to the `wp-db-small` or `wp-db-large` directory you created in the previous step.
+2. Update the `DATA_DIRECTORY` variable to point to the [absolute path](http://www.computerhope.com/jargon/a/absopath.htm) to the `wp-db-small` or `wp-db-large` directory you created in the previous step.
 1. Open `WikAPIdiaExample.java`.
 4. Run the class as an application.
 You should see information about the [Apple article](http://simple.wikipedia.org/wiki/Apple) in simple English Wikipedia that ends with:
