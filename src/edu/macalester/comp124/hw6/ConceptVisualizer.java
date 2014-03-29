@@ -23,9 +23,6 @@ import java.util.List;
  * @author Shilad Sen
  */
 public class ConceptVisualizer extends GraphicsProgram {
-    // The data directory for WikAPIdia.
-    // Change this so it is correct for your laptop
-    private static final String DATA_DIRECTORY = "./wikAPIdia";
     private static final int PAGES_PER_LANG = 30;
 
     // The three languages loaded in the database
@@ -48,7 +45,7 @@ public class ConceptVisualizer extends GraphicsProgram {
      */
     public void init() {
         setSize(800, 400);
-        wp = new WikAPIdiaWrapper("./wikAPIdia");
+        wp = new WikAPIdiaWrapper();
         try {
             GImage bg = new GImage(ImageIO.read(getClass().getResource("/background.jpg")));
             bg.setSize(new GDimension(800, 400));

@@ -13,8 +13,10 @@ import org.wikapidia.core.model.LocalPage;
 import org.wikapidia.core.model.NameSpace;
 import org.wikapidia.core.model.Title;
 import org.wikapidia.core.model.UniversalPage;
+import org.wikapidia.dao.load.PipelineLoader;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,10 @@ import java.util.List;
  */
 public class WikAPIdiaWrapper {
 
+    // The data directory for WikAPIdia. Change this so it is correct for your laptop
+    // It should be the full path to either "wp-db-large" or "wp-db-small"
+    private static final String DATA_DIRECTORY = "/Users/shilad/Documents/IntelliJ/mac-wikAPIdia/wp-db-small";
+
     private static final int CONCEPT_ALGORITHM_ID = 1;
 
     private final Env env;
@@ -35,6 +41,10 @@ public class WikAPIdiaWrapper {
     private LocalPageDao lpDao;
     private LocalLinkDao llDao;
     private UniversalPageDao upDao;
+
+    public WikAPIdiaWrapper() {
+        this(DATA_DIRECTORY);
+    }
 
     /**
      * Creates a new wrapper object with default configuration settings.
@@ -45,14 +55,16 @@ public class WikAPIdiaWrapper {
     public WikAPIdiaWrapper(String baseDir) {
         try {
             File dbDir = new File(baseDir);
+            System.err.println("Checking to see if " + dbDir.getAbsolutePath() + " exists...");
             if (!FilenameUtils.getBaseName(dbDir.getAbsolutePath()).equals("db")) {
                 dbDir = new File(dbDir, "db");
             }
             if (!dbDir.isDirectory()) {
                 System.err.println(
-                        "Database directory " + dbDir + " does not exist." +
-                                "Have you downloaded and extracted the database?" +
-                                "Are you running the program from the right directory?"
+                        "\n\n!!!!!!!!!!!!!!ERROR. READ THIS MESSAGE!!!!!!!!!!!!!!!!!\n" +
+                        "Database directory " + dbDir.getAbsolutePath() + " does not exist.\n" +
+                                "Have you downloaded and extracted the database?\n" +
+                                "Did you specify the correct DATA_DIRECTORY in WikAPIdiaWrapper?"
                 );
                 System.exit(1);
             }
@@ -162,5 +174,15 @@ public class WikAPIdiaWrapper {
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    /**
+     * Load a set of languages into the h2 database.
+     * THIS MUST BE CALLED BEFORE AN INSTANCE OF WIKIPADIA WRAPPER IS CREATED!
+     * @param langCodes comma separated list of langcodes - ie "simple,la"
+     */
+    public static void loadLanguages(String langCodes) throws IOException, InterruptedException, ClassNotFoundException, ConfigurationException {
+        PipelineLoader.main(new String[]{"-l", langCodes});
     }
 }

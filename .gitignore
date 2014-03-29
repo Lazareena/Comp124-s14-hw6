@@ -4,4 +4,5 @@
 *.war
 *.ear
 
-# wikAPIdia/*
+wp-db-small/*
+wp-db-large/*

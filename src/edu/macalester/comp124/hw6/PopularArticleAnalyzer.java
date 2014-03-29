@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Analyzes the overlap in popular concepts.
  * Experimental code for Shilad's intro Java course.
+ * Note that you MUST correct WikAPIdiaWrapper.DATA_DIRECTORY before this works.
  *
  * @author Shilad Sen
  */
@@ -41,15 +42,7 @@ public class PopularArticleAnalyzer {
 
         // Change the path below to point to the parent directory on the lab computer
         // or laptop that holds the BIG "db" directory.
-        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper("./wikAPIdia-small");
-
-        // A simple test of the WikAPIdia wrapper.
-        LocalPage page = wrapper.getLocalPageByTitle(simple, "Apple");
-        if (page == null) {
-            System.err.println("COULDN'T FIND Apple! Something's wrong...");
-            System.exit(1);
-        }
-        System.out.println("page is " + page);
+        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper();
 
         // TODO: Complete me for part 1.
         // construct a PopularArticleAnalyzer
