@@ -10,7 +10,7 @@ As you work on this assignment, you'll practice interacting with java Lists.
 You'll create them, loop over them, and search them.
 
 Your finished program will look like:
-![alt tag](https://raw.github.com/mac-comp124-f13/hw6/master/screenshot.png?login=shilad&token=9ab528c59d524400fd585d7b5f8ac53b)
+![alt tag](./screenshot.png?login=shilad&token=9ab528c59d524400fd585d7b5f8ac53b)
 
 In this visualization, each row of boxes represents the most popular Wikipedia articles in a particular language (Simple English, Hindi, Latin).
 The user of this visualization is hovering their cursor over the Hindi article for "United States", and it is highlighted in purple.
