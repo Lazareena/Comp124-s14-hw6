@@ -34,37 +34,23 @@ However, you will occasionally want to revel in the glory of the full database.
 
 We now need to setup two data directories (one for each dataset). At the end of these steps, the following directories will exist:
 ```
-/some/path/wikAPIdia/db
-/some/path/wikAPIdia-small/db
+/some/path/wp/wp-db-large
+/some/path/wp/wp-db-small
 ```
-The path preceding `wikAPIdia` and `wikAPIdia-small` will change depending on whether you on a lab machine or your own laptop.
 **Do not put these datasets on your H: drive!** Your H: drive will fill up, and your program will slow down drastically.
 
-If you work on lab computers:
-
-1. Create a directory called `/Users/<your name>/wikAPIdia`
-2. Copy the `/db` directory on the lab macs into the directory you created.
-3. Create a directory called `/Users/<your name>/wikAPIdia-small`.
-4. Download the compressed 130MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.small.tar.bz2) and extract the small database into the `wikAPIdia-small` directory (it will also contain a `db` now).
-6. The full path to the newly installed db directories should be: `/Users/<your name>/wikAPIdia/db` and `/Users/<your name>/wikAPIdia-small/db`. 
-
-If you work on your laptop:
-
-1. Download the compressed 1.5 GB [WikAPIdia database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.tar.bz2).
-2. Uncompress the file, you'll find a directory called "db"
-3. Move the directory under the wikAPIdia directory with your hw6 directory. 
-4. Download the compressed 130MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wikAPIdiaDB.small.tar.bz2) and extract the small database into the wikAPIdia-small directory in hw6 (it will also contain a `db` now).
-6. The full path to the newly installed db directories should be: `idea_project_directory/hw6/wikAPIdia/db` and `idea_project_directory/hw6/wikAPIdia-small/db`. 
+1. Create a directory called "wp". if you are working on a lab computer, you should place it in `/Users/<your name>/wp`. If you are on a laptop, you can place it anywhere.
+1. Download the compressed 66MB [WikAPIdia-small database](http://macademia.macalester.edu/shilad/wp-db-small.zip), unzip it, and place the extracted "wp-db-small" directory inside the `wp` directory you created in the previous step.
+4. Repeat this process for the 563MB [WikAPIdia-large database](http://macademia.macalester.edu/shilad/wp-db-large.zip). It should result in a wp-db-large file in the same `wp` directory.
 
 Make sure that things are installed correctly:
 
-1. Open `PopularArticleAnalyzer.java` in IntelliJ
-2. Take a look at the `main()` method. It constructs a `WikAPIdiaWrapper` object. 
-3. The `WikAPIdiaWrapper` constructor takes a String representing the `wikAPIdia` directory that contains your db directory.
-Change this to make it correct.
-This will be `/Users/<yourname>/wikAPIdia-small` on a lab computer, or your `hw6/wikAPIdia-small` directory on your laptop.
-4. Run the class as an application (not Applet): `PopularArticleAnalyzer.main()`. 
-You should see information about the [Apple article](http://simple.wikipedia.org/wiki/Apple) in simple English Wikipedia.
+1. Open the `WikAPIdiaWrapper.java` file in IntelliJ.
+2. Update the `DATA_DIRECTORY` variable to point to the `wp-db-small` or `wp-db-large` directory you created in the previous step.
+1. Open `WikAPIdiaExample.java`.
+4. Run the class as an application.
+You should see information about the [Apple article](http://simple.wikipedia.org/wiki/Apple) in simple English Wikipedia that ends with:
+
 
 ## Get to know the existing algorithmic code:
 
@@ -139,7 +125,7 @@ Before starting this task, familiarize yourself with the graphical components in
 
 For task 2, you'll create a text label describing the element the user is hovering over:
 
-![alt tag](https://raw.github.com/mac-comp124-f13/hw6/master/description.png?login=shilad&token=8940aaab03f8bd16d0a42fb6a5d1f967)
+![alt tag](./description.png)
 
 For this task, you'll complete all your work in `ConceptVisualizer` class in the `mouseMoved` event handler.
 
