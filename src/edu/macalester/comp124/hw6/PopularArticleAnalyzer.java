@@ -7,6 +7,7 @@ import org.wikapidia.core.model.LocalPage;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,19 +35,30 @@ public class PopularArticleAnalyzer {
      * @return
      */
     public List<LocalPage> getMostPopular(Language language, int n) {
-        return null;    // TODO: implement me for part 1
+        List<LocalPagePopularity> results = new ArrayList<LocalPagePopularity>();
+        for (LocalPage lp : wpApi.getLocalPages(language)) {
+            int inLinks = wpApi.getNumInLinks(lp);
+            LocalPagePopularity a = new LocalPagePopularity(lp, inLinks);
+            results.add(a);
+        }
+
+        Collections.sort(results);
+
+        List<LocalPage> popular = new ArrayList<LocalPage>();
+        for (LocalPagePopularity lpp : results.subList(0, n-1)) {
+            popular.add(lpp.getPage());
+            System.out.println(lpp.getPage().getTitle());
+        }
+        return popular;
     }
 
     public static void main(String args[]) {
         Language simple = Language.getByLangCode("simple");
 
-        // Change the path below to point to the parent directory on the lab computer
-        // or laptop that holds the BIG "db" directory.
-        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper();
+        WikAPIdiaWrapper wrapper = new WikAPIdiaWrapper("/Users/Reena/IdeaProjects/comp124s14/hw6/wp/wp-db-large");
 
-        // TODO: Complete me for part 1.
-        // construct a PopularArticleAnalyzer
-        // Print out the 20 most popular articles in the language.
-        // United states should be #1
+        PopularArticleAnalyzer popularArticles = new PopularArticleAnalyzer(wrapper);
+        popularArticles.getMostPopular(simple, 20);
+
     }
 }

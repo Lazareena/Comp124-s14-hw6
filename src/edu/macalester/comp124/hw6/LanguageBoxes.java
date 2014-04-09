@@ -24,6 +24,7 @@ public class LanguageBoxes extends GCompound {
 
     /**
      * Creates a new set of language boxes associated with some pages.
+     *
      * @param color
      * @param language
      * @param pages
@@ -32,7 +33,8 @@ public class LanguageBoxes extends GCompound {
         this.color = color;
         this.language = language;
         GLabel label = new GLabel(language.toString());
-        label.setColor(ColorPallete.FONT_COLOR);
+        label.setColor(Color.BLUE);
+        label.setFont("Helvetica-20");
         add(label, 0, 0);
         for (LocalPage lp : pages) {
             LocalPageBox box = new LocalPageBox(color, lp);
@@ -46,10 +48,25 @@ public class LanguageBoxes extends GCompound {
     /**
      * Highlights the specified pages (i.e. colors them "normal").
      * All other pages should be colored gray.
+     *
      * @param pages
      */
+
     public void highlightPages(List<LocalPage> pages) {
-        // TODO: implement me for part 3
+        Color normal = this.color;
+
+        for (int j = 0; j < boxes.size(); j++) {
+
+            for (int i = 0; i < pages.size(); i++) {
+                LocalPage a = pages.get(i);
+                if (a.equals(boxes.get(j).getPage())) {
+                    boxes.get(j).setFillColor(normal);
+                    break;
+                } else {
+                    boxes.get(j).setFillColor(color.GRAY);
+                }
+            }
+        }
     }
 
     /**
@@ -57,6 +74,10 @@ public class LanguageBoxes extends GCompound {
      */
     public void unhighlight() {
         // TODO: implement me for part 3
+        Color normal = this.color;
+        for (int i = 0; i < boxes.size(); i++) {
+            boxes.get(i).setFillColor(normal);
+        }
     }
 
     public Language getLanguage() {
@@ -69,6 +90,7 @@ public class LanguageBoxes extends GCompound {
 
     /**
      * Returns the local page box at some location.
+     *
      * @param x
      * @param y
      * @return

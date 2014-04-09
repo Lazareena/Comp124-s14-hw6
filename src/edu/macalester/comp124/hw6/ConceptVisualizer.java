@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Visualizes the most popular concepts in each language,
  * and the pages in other languages associated with the same concept.
- *
+ * <p/>
  * This class MUST be run as a Java application (ConceptVisualizer.main()).
  * This class MUST be run from the module directory.
  *
@@ -54,7 +54,8 @@ public class ConceptVisualizer extends GraphicsProgram {
             e.printStackTrace();
         }
         label = new FancyLabel("Hover over a title to analyze it");
-        label.setColor(ColorPallete.FONT_COLOR);
+        label.setColor(Color.getHSBColor(10,30,30));
+        label.setFont("Times-20");
 
         add(label, 20, 20);
         simpleBoxes = makeBoxes(SIMPLE, ColorPallete.COLOR1, 150);
@@ -78,15 +79,16 @@ public class ConceptVisualizer extends GraphicsProgram {
             latinBoxes.unhighlight();
             hindiBoxes.unhighlight();
             label.setText("Hover over a title to analyze it");
+
         } else {
-            List<LocalPage> pages = null;
+            List<LocalPage> pages = wp.getInOtherLanguages(hoverPage);
             String description = "";
 
             System.out.println("You hovered over " + hoverPage);
-            // TODO:
-            // Get pages representing the same concept in other languages.
-            // Build up a textual description of the pages in each language.
-            // You can insert line breaks in your textual description using newlines ("\n").
+
+            for (LocalPage lp : pages) {
+                description += lp.getLanguage() + ":" + lp.getTitle() + "\n";
+            }
 
             label.setText(description);
 
@@ -98,6 +100,7 @@ public class ConceptVisualizer extends GraphicsProgram {
 
     /**
      * Creates boxes for a particular language.
+     *
      * @param language
      * @param color
      * @param y
@@ -113,6 +116,7 @@ public class ConceptVisualizer extends GraphicsProgram {
 
     /**
      * Returns the page at an x, y location
+     *
      * @param x
      * @param y
      * @return
@@ -120,7 +124,7 @@ public class ConceptVisualizer extends GraphicsProgram {
     private LocalPage getPageAt(double x, double y) {
         GObject o = getElementAt(x, y);
         if (o instanceof LanguageBoxes) {
-            LanguageBoxes boxes = (LanguageBoxes)o;
+            LanguageBoxes boxes = (LanguageBoxes) o;
             LocalPageBox box = boxes.getLocalBoxAt(x, y);
             if (box != null) {
                 return box.getPage();
