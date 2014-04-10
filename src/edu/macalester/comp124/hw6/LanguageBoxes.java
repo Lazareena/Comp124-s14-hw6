@@ -33,7 +33,7 @@ public class LanguageBoxes extends GCompound {
         this.color = color;
         this.language = language;
         GLabel label = new GLabel(language.toString());
-        label.setColor(Color.BLUE);
+        label.setColor(Color.LIGHT_GRAY);
         label.setFont("Helvetica-20");
         add(label, 0, 0);
         for (LocalPage lp : pages) {
