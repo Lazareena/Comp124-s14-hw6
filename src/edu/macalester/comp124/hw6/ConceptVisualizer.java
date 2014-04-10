@@ -47,14 +47,14 @@ public class ConceptVisualizer extends GraphicsProgram {
         setSize(800, 400);
         wp = new WikAPIdiaWrapper();
         try {
-            GImage bg = new GImage(ImageIO.read(getClass().getResource("/fire-bokeh-background.jpg")));
+            GImage bg = new GImage(ImageIO.read(getClass().getResource("/8801870-brick-wall-background.jpg")));
             bg.setSize(new GDimension(800, 400));
             add(bg);
         } catch (IOException e) {
             e.printStackTrace();
         }
         label = new FancyLabel("Hover over a title to analyze it");
-        label.setColor(Color.MAGENTA);
+        label.setColor(Color.ORANGE);
         label.setFont("Courier-20");
 
         add(label,(getWidth()/2)-(label.getWidth()/2), 20);
